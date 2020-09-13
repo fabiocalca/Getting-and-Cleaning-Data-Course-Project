@@ -1,6 +1,4 @@
-library(tidyr)
 library(reshape2)
-library(beepr)
 # run_analysis.R
 
 # Download the dataset from the internet
@@ -31,7 +29,7 @@ strain <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/train/subject_tr
 xtest <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/X_test.txt"))
 ytest <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/Y_test.txt"))
 stest <- read.table(paste(sep = "", dataDir, "/UCI HAR Dataset/test/subject_test.txt"))
-beep(sound=2)
+
 # merge data
 xdata <- xtrain %>%
           rbind(xtest)
@@ -39,7 +37,7 @@ ydata <- ytrain %>%
           rbind(ytest)
 sdata <- strain %>%
           rbind(stest)
-beep(sound=2)
+
 
 ## get info
 # feature info
@@ -67,7 +65,7 @@ allData$Activity <- factor(allData$Activity, levels = actLabel[,1], labels = act
 allData$Subject <- as.factor(allData$Person)
 
 
-#5. generate tidy data set
+# generate tidy data set
 meltedData <- allData %>%
                 melt(id = c("Subject", "Activity"))
 tidyData <- meltedData %>%
